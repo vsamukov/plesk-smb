@@ -41,8 +41,8 @@ ssh2_auth_password($ssh, 'root', $root_password);
 //DISABLE SELINUX AND RESET INSTANCE DATA
 
 
-//$CMD1="setenforce 0;/usr/local/psa/admin/sbin/reset_instance_data --do-what-I-say --force";
-$CMD1="setenforce 0; echo hello";
+$CMD1="setenforce 0;/usr/local/psa/admin/sbin/reset_instance_data --do-what-I-say --force";
+//$CMD1="setenforce 0; echo hello";
 echo $CMD1;
 echo "<br>";
 
