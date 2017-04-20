@@ -1,0 +1,86 @@
+<html>
+<head></head>
+<body/>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<script>
+
+// handles the click event, sends the query
+function getSuccessOutput() {
+    $.ajax({
+        url: 'myAjax.php',
+        complete: function (response) {
+            $('#output').html(response.responseText);
+        },
+        error: function () {
+            $('#output').html('Bummer: there was an error!');
+        },
+    });
+    return false;
+}
+// handles the click event, sends the query
+function getFailOutput() {
+    $.ajax({
+        url:'fail_myAjax.php',
+        success: function (response) {
+            console.log(data, response);
+            $('#output').html(response);
+        },
+        error: function () {
+            $('#output').html('Bummer: there was an error!');
+        },
+    });
+    return false;
+}
+
+</script>
+
+
+
+<form method="post" name="form">
+
+    Email: <input type="text" name="email" /><br />
+    Name: <input type="text" name="name" /><br />
+    Company name: <input type="text" name="company" /><br />
+
+        IP:  <input type="text" name="ip" /><br />
+        Server root password: <input type="text" name="root_password" /><br />
+        Desired Plesk password:<input type="text" name="plesk_password" /><br />
+        Desired server name: <input type="text" name="plesk_hostname" /><br />
+
+            <input type="submit" name="submit" value="Install Plesk SMB server" />
+
+<br>
+
+
+<a href="#" onclick="return getSuccessOutput();"> test success </a> | <a href="#" onclick="return getFailOutput(); return false;"> test failure</a>
+<div id="output">waiting for action</div>
+
+
+<script>
+    $(document).ready(function(){
+        // click on button submit
+        $("#submit").on('click', function(){
+            // send ajax
+            $.ajax({
+                url: 'parameters.php', // url where to submit the request
+                type : "POST", // type of action POST || GET
+                dataType : 'json', // data type
+                data : $("#form").serialize(), // post data || get data
+                success : function(result) {
+                    // you can see the result from the console
+                    // tab of the developer tools
+                    console.log(result);
+                },
+                error: function(xhr, resp, text) {
+                    console.log(xhr, resp, text);
+                }
+            })
+        });
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+<html><head></head><body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+
+<!-- // INSTALLATION -->
+
+ <script>
+ function Install() {
+ var name = $("#name").val();
+ var email = $("#email").val();
+ var root_password = $("#root_password").val();
+ var plesk_password = $("#plesk_password").val();
+ var ip = $("#ip").val();
+ var hostname = $("#hostname").val();
+ var company = $("#company").val();
+ $.post("install.php", { name: name, email: email, ip: ip, plesk_password: plesk_password, root_password: root_password, company: company, hostname: hostname },
+ function(data) {
+//$('#Install_button').attr("disabled", true);
+$('#install_result').html(data);
+// alert("Data Loaded: " + data);
+//$('#Install_button').attr("disabled", false);
+
+ });
+ }
+</script>
+
+<script>
+ 
+function reset_buttons(){
+$('#Install_button').attr("disabled", false);
+$('#Init_button').attr("disabled", false);
+$('#Extensions_button').attr("disabled", false);
+$('#License_button').attr("disabled", false);
+$('#Post_button').attr("disabled", false);
+}
+</script>
+
+<!-- //FORM -->
+
+<form action="unsubmit.php"  method="post">
+Name: <input name="name" id="name" type="text" /><br />
+Email: <input name="email" id="email" type="text" /><br />
+Company Name: <input name="company" id="company" type="text" /><br />
+IP: <input name="ip" id="ip" type="text" /><br />
+Root password: <input name="root_password" id="root_password" type="text" /><br />
+Plesk password: <input name="plesk_password" id="plesk_password" type="text" /><br />
+Hostname: <input name="hostname" id="hostname" type="text" /><br />
+<input type="button" id="Install_button" onclick="Install();" value="1 Install" />
+<input type="button" id="Init_button" onclick="Init();" value="2 Initialize" />
+<input type="button" id="Extensions_button" onclick="Extensions();" value="3 Extensions" />
+<input type="button" id="License_button" onclick="License();" value="4 License keys" />
+<input type="button" id="Post_button" onclick="PostInstall();" value="5 Post install" />
+<input type="button" id="Login_button" onclick="LoginLink();" value="6 Login link" />
+<input type="button" id="Reset" onlick="reset_buttons();" value="Reset buttons"/>
+</form>
+
+
+
+<!-- //PLESK INIT -->
+
+ <script>
+ function Init() {
+ var name = $("#name").val();
+ var email = $("#email").val();
+ var root_password = $("#root_password").val();
+ var plesk_password = $("#plesk_password").val();
+ var ip = $("#ip").val();
+ var hostname = $("#hostname").val();
+ var company = $("#company").val();
+ $.post("init.php", { name: name, email: email, ip: ip, plesk_password: plesk_password, root_password: root_password, company: company, hostname: hostname },
+ function(data) {
+//$('#Init_button').attr("disabled", true);
+$('#init_result').html(data);
+// alert("Data Loaded: " + data);
+ });
+ }
+ </script>
+
+
+<!-- //EXTENSIONS INSTALLATION -->
+
+ <script>
+ function Extensions() {
+ var name = $("#name").val();
+ var email = $("#email").val();
+ var root_password = $("#root_password").val();
+ var plesk_password = $("#plesk_password").val();
+ var ip = $("#ip").val();
+ var hostname = $("#hostname").val();
+ var company = $("#company").val();
+ $.post("extensions.php", { name: name, email: email, ip: ip, plesk_password: plesk_password, root_password: root_password, company: company, hostname: hostname },
+ function(data) {
+//$('#Extensions_button').attr("disabled", true);
+$('#ext_result').html(data);
+// alert("Data Loaded: " + data);
+ });
+ }
+ </script>
+
+
+<!-- // RESULT FIELDS -->
+
+installation result<br>
+<div id="install_result">installation result is here </div>
+<br>
+
+initialization result<br>
+<div id="init_result">initialization result is here </div>
+<br>
+
+extensions installation result<br>
+<div id="ext_result">extensions result is here </div>
+<br>
+
+license installation result<br>
+<div id="license_result">license result is here </div>
+<br>
+
+postinstall actions result<br>
+<div id="post_result">post install result is here </div>
+<br>
+
+login link is here<br>
+<div id="login_link">login link is here </div>
+<br>
+
+
+<!-- //GET LOGIN LINK -->
+
+<script>
+function LoginLink(){
+var root_password = $("#root_password").val();
+ var ip = $("#ip").val();
+ $.post("loginlink.php", {  ip: ip, root_password: root_password },
+ function(data) {
+//$('#Login_button').attr("disabled", true);
+$('#login_link').html(data);
+// alert("Data Loaded: " + data);
+ });
+}
+</script>
+
+
+<!-- //LICENSE -->
+
+ <script>
+ function License() {
+ var name = $("#name").val();
+ var email = $("#email").val();
+ var root_password = $("#root_password").val();
+ var plesk_password = $("#plesk_password").val();
+ var ip = $("#ip").val();
+ var hostname = $("#hostname").val();
+ var company = $("#company").val();
+ $.post("license.php", { name: name, email: email, ip: ip, plesk_password: plesk_password, root_password: root_password, company: company, hostname: hostname },
+ function(data) {
+//$('#Init_button').attr("disabled", true);
+$('#license_result').html(data);
+// alert("Data Loaded: " + data);
+ });
+ }
+ </script>
+
+<!-- //POST INSTALL ACTIONS: failn2ban, firewall, etc. -->
+
+ <script>
+ function PostInstall() {
+ var name = $("#name").val();
+ var email = $("#email").val();
+ var root_password = $("#root_password").val();
+ var plesk_password = $("#plesk_password").val();
+ var ip = $("#ip").val();
+ var hostname = $("#hostname").val();
+ var company = $("#company").val();
+ $.post("post-install.php", { name: name, email: email, ip: ip, plesk_password: plesk_password, root_password: root_password, company: company, hostname: hostname },
+ function(data) {
+//$('#Post_button').attr("disabled", true);
+$('#post_result').html(data);
+// alert("Data Loaded: " + data);
+ });
+ }
+ </script>
+
+
+
+</body>
+</html>
+
