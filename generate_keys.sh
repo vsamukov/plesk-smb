@@ -21,7 +21,7 @@ echo   \]>>payload
 echo \}\;>>payload;
 
 curl -v -Li -X POST \
---user "tsuzukiReseller:WRV475FP06HMa6ETpDgb1zfn6ygEZMik" \
+--user "LOGIN:PASSWORD" \
 -H "Content-Type: application/json; charset=UTF-8" \
  "https://ka.demo.plesk.com:7050/jsonrest/business-partner/30/keys?return-key-state=true" \
 -d@payload >> activation.txt
